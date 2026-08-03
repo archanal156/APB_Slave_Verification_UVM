@@ -4,24 +4,6 @@ A UVM-based verification environment for an AMBA APB Slave, featuring
 constrained-random stimulus, a reference model, functional coverage, and a
 self-checking scoreboard.
 
-## Architecture
-
-```
-                ┌─────────────────────────────────────────────┐
-                │                environment                  │
-                │                                              │
-   sequence1 ───▶  iagent                         oagent       │
-                │  ├─ sequencer                   ├─ omonitor  │
-                │  ├─ driver ──────┐               │           │
-                │  └─ imonitor     │  DUT (apb_design)          │
-                │        │         └─────▶ Paddr/Pselx/... ────▶│
-                │        │                Pready/Prdata/Pslverr │
-                │        ▼                        │             │
-                │   uvm_analysis_port       uvm_analysis_port    │
-                │        │                        │              │
-                │        └────────▶ scoreboard ◀───┘              │
-                └─────────────────────────────────────────────┘
-```
 
 - **driver** – drives APB SETUP/ACCESS phases onto the interface from
   randomized `packet` items.
