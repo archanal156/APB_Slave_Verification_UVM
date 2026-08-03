@@ -1,0 +1,42 @@
+# ---- Simulation waveforms & dumps ----
+*.vcd
+*.wlf
+*.fsdb
+*.shm/
+*.vpd
+
+# ---- Questa / ModelSim ----
+work/
+transcript
+vsim.wlf
+modelsim.ini
+*.mti
+
+# ---- VCS / Synopsys ----
+csrc/
+simv
+simv.daidir/
+ucli.key
+DVEfiles/
+vc_hdrs.h
+.vcs*
+*.log
+
+# ---- Xcelium / Cadence ----
+xcelium.d/
+*.history
+*.diag
+*.key
+INCA_libs/
+
+# ---- Coverage / reports ----
+coverage/
+*.ucdb
+urg_report/
+covhtml/
+
+# ---- OS / editor junk ----
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
