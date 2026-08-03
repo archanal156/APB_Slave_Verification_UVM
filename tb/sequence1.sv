@@ -1,28 +1,37 @@
+class sequence1 extends uvm_sequence #(packet);
 
-class sequence1 extends uvm_sequence#(packet);
-  `uvm_object_utils(sequence1);
+  `uvm_object_utils(sequence1)
   
-    packet pkt;
-      
+  packet pkt;
+
   function new(string name="sequence1");
     super.new(name);
   endfunction
-    
-    task body();
+
+  task body();
+
+    repeat(10)
+    begin
+
+      `uvm_info("SEQ","Generating APB transaction",UVM_MEDIUM)
       
-      repeat(2) begin
-      `uvm_info("SEQUENCE","Running sequence",UVM_MEDIUM);
       pkt = packet::type_id::create("pkt");
-      start_item(pkt);
-        pkt.c1_legal.constraint_mode(1);
-      assert(pkt.randomize() with {
-        pkt.Pselx ==1 ; 
-        pkt.Pwrite == 1; 
       
-      });
-      finish_item(pkt);
-      `uvm_info("SEQUENCE","sequence done",UVM_MEDIUM);
+      start_item(pkt);
+      
+      if(!pkt.randomize() with {
+          Pselx == 1;
+          Paddr inside {[0:31]};
+          Pwrite dist {
+             1 := 50,
+             0 := 50
+          };
+      })
+      begin
+          `uvm_error("SEQ","Randomization failed")
       end
-    endtask
-    
+      
+      finish_item(pkt);
+    end
+  endtask
 endclass
